@@ -27,39 +27,39 @@ class Room:
         self.roomNumber = roomNumber
 
     def enter(self):
-
         if(self.roomNumber not in visited):
             visited.append(self.roomNumber)
         
-        print "You've entered Room No. ",self.roomNumber
+        print(f"You've entered Room No. {self.roomNumber}")
         if(self.roomNumber == easterEggRoom):
-            print "It is pitch black. You are likely to be eaten by a grue."
-        #print self.description
-        #print "\n", self.cont['line'], "\n"
+            print("It is pitch black. You are likely to be eaten by a grue.")
+        #print(self.description)
+        #print("\n", self.cont['line'], "\n")
             
-        print "\n" + bcolors.OKGREEN + self.line + bcolors.ENDC + "\n"
+        print(f"\n{bcolors.OKGREEN}{self.line}{bcolors.ENDC}\n")
 
         if((self.roomNumber == 12 and 13 in visited) or (self.roomNumber == 13 and 12 in visited)):
             theEnd()
-            #print "The End."
+            #print("The End.")
         else:
             self.printDestinations()
             self.prompt()
 
     def printDestinations(self):
-        print "Destinations:"
+        print("Destinations:")
         for which in self.destinations:
-            print which,
+            print(which, end=' ')
+        print()
     
     def prompt(self):
         goodToGo = 0
         while(not goodToGo):
-            result = raw_input('--> ')
+            result = input('--> ')
             result = result.upper().split(' ')
             if(result[0] == 'GO' and result[1] in self.destinations):
                 if(self.destinations[result[1]] in visited):
-                   print "You were already in that room... try another destination."
-                   print "If you definitely absolutely want to go that way, try 'force.'"
+                   print("You were already in that room... try another destination.")
+                   print("If you definitely absolutely want to go that way, try 'force.'")
                    continue
                 else:
                    goodToGo = 1
@@ -68,25 +68,25 @@ class Room:
                 goodToGo = 1
                 self.goToRoom(self.destinations[result[1]])
             elif(result[0] == 'QUIT'):
-                print "Quitter!"
+                print("Quitter!")
                 break
             elif(result[0] == 'LOOK'):
                 self.printDestinations()
                 continue
             else:
-                print "Command unknown. Try 'go' with a destination!"
+                print("Command unknown. Try 'go' with a destination!")
                 continue
                 #self.prompt()
 
     def goToRoom(self, where):
-        #print "Going to Room #", where
+        #print("Going to Room #", where)
         rooms[where].enter()
 
 def theEnd():
-    print "The End."
-    print "\nYou visited these rooms:"
-    print visited
-    print "The easter egg was in Room No. ", easterEggRoom
+    print("The End.")
+    print("\nYou visited these rooms:")
+    print(visited)
+    print(f"The easter egg was in Room No. {easterEggRoom}")
 
 rooms = []
 visited = []
