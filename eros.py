@@ -20,7 +20,6 @@ class Room:
     "Stores data for individual rooms"
     
     description = 'Default Room Description'
-    #cont = {'line':''}
     destinations = {}
 
     def __init__(self, roomNumber):
@@ -33,14 +32,11 @@ class Room:
         print(f"You've entered Room No. {self.roomNumber}")
         if(self.roomNumber == easterEggRoom):
             print("It is pitch black. You are likely to be eaten by a grue.")
-        #print(self.description)
-        #print("\n", self.cont['line'], "\n")
             
         print(f"\n{bcolors.OKGREEN}{self.line}{bcolors.ENDC}\n")
 
         if((self.roomNumber == 12 and 13 in visited) or (self.roomNumber == 13 and 12 in visited)):
             theEnd()
-            #print("The End.")
         else:
             self.printDestinations()
             self.prompt()
